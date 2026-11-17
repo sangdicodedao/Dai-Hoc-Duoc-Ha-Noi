@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>- CỔNG THÔNG TIN SINH VIÊN -TRƯỜNG ĐẠI HỌC DƯỢC HÀ NỘI</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='96' fill='%23ffffff' stroke='%231e2421' stroke-width='4'/%3E%3Ccircle cx='100' cy='100' r='74' fill='%23d4e3f6' stroke='%231e2421' stroke-width='3'/%3E%3Cpath d='M8 126 Q55 112 100 132 Q145 112 192 126 A96 96 0 0 1 8 126 Z' fill='%233b7a22' stroke='%231e2421' stroke-width='3'/%3E%3Cpath d='M75 62 H125 A25 22 0 0 1 75 62 Z' fill='%23ffffff' stroke='%231e2421' stroke-width='3.5'/%3E%3Crect x='97.5' y='83' width='5' height='45' fill='%23ffffff' stroke='%231e2421' stroke-width='2.5'/%3E%3Cpath d='M93 62 C85 45 106 38 103 49 C101 55 96 55 98 62 M101 84 C115 86 116 97 101 101 M98 104 C89 109 89 116 98 119' fill='none' stroke='%231b1f1d' stroke-width='5.5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #333333;
+  --border: #d6dde0;
+  --row-alt: #f2f2f2;
+  --row-hover: #e9f5f8;
+  --green: #148a34;
+  --thead: #187795;
+  --thead-border: #2a8ca8;
+  --h1: #36b9da;
+  --h2: #178eb0;
+  --brand-sub: #fdf6a3;
+  --chk: #b9d9e4;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.38;
+}
+
+/* ================= HEADER & NAVBAR ================= */
+.topbar {
+  background: linear-gradient(180deg, var(--h1), var(--h2));
+  padding: 12px 18px 14px;
+  position: relative;
+}
+
+.topbar-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.logo {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.logo svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.brand-text b {
+  display: block;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.35;
+  letter-spacing: 0.2px;
+}
+
+.brand-text small {
+  display: block;
+  color: var(--brand-sub);
+  font-weight: bold;
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.header-user {
+  font-size: 13px;
+  color: #111111;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-user a {
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+
+.header-user a:hover {
+  text-decoration: underline;
+}
+
+.nav-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 14px;
+}
+
+.nav-pill {
+  background: #ffffff;
+  border: 1px solid #d5e2e6;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #111111;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  user-select: none;
+  transition: background 0.12s;
+}
+
+.nav-pill:hover {
+  background: #eef8fb;
+}
+
+.nav-pill.active {
+  background: #0f8cb1;
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #000000;
+}
+
+.nav-pill.active .caret {
+  color: #ffffff;
+}
+
+.nav-pill .caret {
+  color: #2185a6;
+  font-size: 10px;
+}
+
+.nav-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 2px);
+  min-width: 215px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.16);
+  z-index: 50;
+  display: none;
+  overflow: hidden;
+}
+
+.dropdown-menu.open {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 12px;
+  font-size: 12px;
+  color: #333333;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--row-hover);
+  color: var(--thead);
+}
+
+/* ================= CÁC TRANG ĐĂNG KÝ CHỨC NĂNG ================= */
+.portal-section {
+  display: none;
+}
+
+.portal-section.active {
+  display: block;
+}
+
+.reg-page {
+  padding: 18px 18px 28px;
+}
+
+.reg-heading {
+  text-align: center;
+  color: #222222;
+  font-size: 24px;
+  font-weight: normal;
+  margin: 4px 0 10px;
+  letter-spacing: 0.3px;
+}
+
+.reg-heading.green {
+  color: #15803d;
+}
+
+.reg-alert {
+  text-align: center;
+  color: #d93025;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.reg-alert.italic {
+  font-style: italic;
+}
+
+.reg-step-title {
+  color: #15803d;
+  font-size: 18px;
+  font-weight: normal;
+  margin: 0 0 10px;
+}
+
+.reg-action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 6px 0 10px;
+}
+
+.btn-step {
+  background: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  color: #868e96;
+  cursor: not-allowed;
+}
+
+.btn-submit-red {
+  background: #c95b5b;
+  border: 1px solid #b54848;
+  border-radius: 4px;
+  padding: 7px 14px;
+  font-size: 13px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn-submit-red:hover {
+  background: #b84a4a;
+}
+
+.reg-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12.5px;
+  font-weight: bold;
+  color: #111111;
+  padding: 4px 0 18px;
+}
+
+.reg-section-title {
+  text-align: center;
+  color: #15803d;
+  font-size: 20px;
+  font-weight: normal;
+  margin: 12px 0 12px;
+}
+
+.reg-section-title.left {
+  text-align: left;
+  font-size: 20px;
+}
+
+/* Quy định & Bảng mức thu lệ phí */
+.fee-notes {
+  margin: 18px 0 10px;
+  padding-left: 20px;
+  color: #d93025;
+  font-weight: bold;
+  font-size: 12.5px;
+  line-height: 1.75;
+}
+
+.fee-notes ul {
+  margin: 2px 0;
+  padding-left: 22px;
+  list-style-type: circle;
+}
+
+/* Hướng dẫn phúc khảo */
+.appeal-guide {
+  color: #c92a2a;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 14px 0 18px;
+}
+
+.appeal-guide .guide-head {
+  margin-bottom: 4px;
+}
+
+.appeal-guide .guide-step {
+  margin-top: 6px;
+}
+
+.appeal-guide ul {
+  margin: 2px 0 6px;
+  padding-left: 22px;
+}
+
+.appeal-table-wrap {
+  margin: 10px 0 24px;
+  min-height: 54px;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  color: #666666;
+  font-size: 12.5px;
+}
+
+.fee-table {
+  width: 100%;
+  max-width: 980px;
+  border-collapse: collapse;
+  margin: 8px 0 12px;
+  font-size: 12.5px;
+}
+
+.fee-table th,
+.fee-table td {
+  border: 1px solid #e0a8a8;
+  padding: 8px 10px;
+  text-align: center;
+  color: #d93025;
+  font-weight: bold;
+  background: #ffffff !important;
+}
+
+.fee-table th {
+  background: #fff5f5 !important;
+}
+
+/* Bảng Internship */
+#tblInternship {
+  min-width: 1120px;
+}
+
+#tblInternship th {
+  font-style: italic;
+}
+
+#tblInternship td {
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
+.intern-count {
+  font-size: 24px;
+  font-weight: normal;
+  color: #222222;
+  margin: 22px 0 10px;
+}
+
+.intern-selected-box {
+  background: #e9ecef;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  min-height: 36px;
+  margin-bottom: 10px;
+}
+
+/* Trang Hướng dẫn đăng ký tín chỉ (Đ.KÝ KHÓA LUẬN) */
+.guide-page {
+  background: #f2f3f5;
+  padding: 20px 18px 28px;
+}
+
+.guide-main-title {
+  text-align: center;
+  color: #008a00;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0 0 6px;
+}
+
+.guide-sub-title {
+  text-align: center;
+  color: #008a00;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 0 18px;
+}
+
+.guide-step-line {
+  font-size: 19px;
+  color: #0b5ed7;
+  margin: 14px 0 12px;
+  line-height: 1.4;
+}
+
+.guide-step-line u {
+  font-weight: bold;
+}
+
+.guide-step-line .red-note {
+  color: #d93025;
+}
+
+.mock-shot {
+  max-width: 1020px;
+  margin: 0 auto 22px;
+  background: #f8f9fa;
+  border: 1px solid #cfd4da;
+  padding: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.mock-shot-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4px;
+}
+
+.mock-btn {
+  background: #f1f3f5;
+  border: 1px solid #adb5bd;
+  border-radius: 2px;
+  padding: 3px 9px;
+  font-size: 11px;
+  color: #222222;
+}
+
+.mock-bar-dark {
+  background: #6c757d;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mock-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  background: #ffffff;
+}
+
+.mock-table th {
+  background: #ced4da;
+  color: #222222;
+  border: 1px solid #adb5bd;
+  padding: 4px 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.mock-table td {
+  border: 1px solid #dee2e6;
+  padding: 3px 6px;
+  color: #333333;
+  background: #ffffff !important;
+}
+
+.mock-callout {
+  position: absolute;
+  right: 170px;
+  top: 78px;
+  color: #d97706;
+  font-weight: bold;
+  font-size: 13px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 2px 6px;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.mock-shot-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+/* ================= THANH CHỌN & TIÊU ĐỀ BẢNG ĐIỂM ================= */
+.filterbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  background: #ffffff;
+}
+
+.filterbar label {
+  font-weight: bold;
+  color: #222222;
+}
+
+select {
+  border: 1px solid #b5bec2;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 12px;
+  background: #ffffff;
+  color: #222222;
+  cursor: pointer;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 13.5px;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  letter-spacing: 0.2px;
+  color: #222222;
+}
+
+/* ================= KHỐI THỐNG KÊ ================= */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 8px 24px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--green);
+  font-size: 12px;
+  text-align: right;
+  line-height: 1.75;
+}
+
+.stats div {
+  min-width: 220px;
+}
+
+.stats b {
+  color: #222222;
+}
+
+/* ================= BẢNG DỮ LIỆU ================= */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.data-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+
+#tblMain {
+  min-width: 1120px;
+}
+
+#tblUnlearned {
+  min-width: 760px;
+}
+
+table.data-table th {
+  background: var(--thead);
+  color: #ffffff;
+  padding: 7px 6px;
+  border: 1px solid var(--thead-border);
+  text-align: left;
+  font-weight: bold;
+  line-height: 1.3;
+  vertical-align: top;
+}
+
+table.data-table td {
+  padding: 8px 6px;
+  border: 1px solid var(--border);
+  vertical-align: top;
+  color: #333333;
+}
+
+table.data-table tbody tr:nth-child(even) td {
+  background: var(--row-alt);
+}
+
+table.data-table tbody tr:hover td {
+  background: var(--row-hover);
+}
+
+td.col-stt {
+  text-align: left;
+}
+
+td.col-ky {
+  text-align: right;
+}
+
+td.code {
+  text-align: left;
+  white-space: nowrap;
+  color: #333333;
+}
+
+td.name {
+  text-align: left;
+  min-width: 84px;
+  max-width: 120px;
+  color: #333333;
+}
+
+td.code a,
+td.name a {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+td.code a:hover,
+td.name a:hover {
+  text-decoration: underline;
+}
+
+td.col-center {
+  text-align: center;
+}
+
+td.col-tp {
+  text-align: left;
+  line-height: 1.45;
+  min-width: 72px;
+}
+
+td.col-note {
+  text-align: left;
+  min-width: 44px;
+}
+
+.chk {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #cfd6da;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  background: #ffffff;
+}
+
+.chk.on {
+  background: var(--chk);
+  border-color: var(--chk);
+  position: relative;
+}
+
+.chk.on::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 4px;
+  height: 8px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.section-title {
+  padding: 18px 14px 8px;
+  font-weight: bold;
+  font-size: 13px;
+  border-bottom: 1px solid var(--border);
+  color: #222222;
+}
+
+.footer {
+  padding: 14px 12px 20px;
+  font-size: 11px;
+  color: #666666;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+}
+
+/* ================= MÀN HÌNH ĐĂNG NHẬP MICROSOFT ENTRA ID ================= */
+.ms-login-screen {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 24px 16px 48px;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f3f5fa;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(215, 229, 245, 0.85) 0%, transparent 45%),
+    radial-gradient(circle at 86% 24%, rgba(226, 224, 248, 0.85) 0%, transparent 45%),
+    radial-gradient(circle at 75% 84%, rgba(218, 232, 248, 0.9) 0%, transparent 50%),
+    linear-gradient(135deg, #e8eff8 0%, #f5f6fb 48%, #e6edf7 100%);
+}
+
+.ms-card {
+  width: 100%;
+  max-width: 440px;
+  background: #ffffff;
+  padding: 44px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  color: #1b1b1b;
+}
+
+.ms-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.ms-brand span {
+  font-size: 18px;
+  font-weight: 600;
+  color: #5e5e5e;
+  letter-spacing: -0.2px;
+}
+
+.ms-identity-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  font-size: 15px;
+  color: #1b1b1b;
+}
+
+.ms-back-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  margin-left: -4px;
+  cursor: pointer;
+  color: #5e5e5e;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ms-back-btn:hover {
+  background: #f2f2f2;
+}
+
+.ms-title {
+  margin: 0 0 16px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1b1b1b;
+  line-height: 28px;
+}
+
+.ms-error {
+  color: #e81123;
+  font-size: 14px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.ms-error:empty {
+  display: none;
+}
+
+.ms-input-wrap {
+  margin-bottom: 16px;
+}
+
+.ms-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #666666;
+  padding: 6px 2px 8px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #1b1b1b;
+  background: transparent;
+  outline: none;
+  border-radius: 0;
+}
+
+.ms-input::placeholder {
+  color: #666666;
+}
+
+.ms-input:focus {
+  border-bottom: 2px solid #0067b8;
+  padding-bottom: 7px;
+}
+
+.ms-links {
+  margin: 12px 0 24px;
+  font-size: 13px;
+}
+
+.ms-links a {
+  color: #0067b8;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ms-links a:hover {
+  color: #005da6;
+  text-decoration: underline;
+}
+
+.ms-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ms-submit-btn {
+  min-width: 108px;
+  height: 32px;
+  padding: 4px 12px;
+  background: #0067b8;
+  border: 1px solid #0067b8;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.ms-submit-btn:hover {
+  background: #005da6;
+  border-color: #005da6;
+}
+
+.ms-footer {
+  position: fixed;
+  right: 16px;
+  bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  color: #000000;
+}
+
+.ms-footer a {
+  color: #000000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.ms-footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .ms-card {
+    padding: 32px 24px;
+  }
+}
+
+/* ================= MODAL ================= */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 14px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background: #ffffff;
+  color: #333333;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-head {
+  background: var(--thead);
+  color: #ffffff;
+  padding: 9px 12px;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-content {
+  padding: 14px;
+  font-size: 12.5px;
+}
+
+.modal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.modal-table th,
+.modal-table td {
+  border: 1px solid var(--border);
+  padding: 6px;
+  text-align: center;
+}
+
+@media print {
+  .nav-pills,
+  .filterbar,
+  .header-user a {
+    display: none !important;
+  }
+  .topbar {
+    background: #178eb0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  table.data-table th {
+    background: #187795 !important;
+    color: #ffffff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .table-wrap {
+    overflow: visible !important;
+  }
+  table.data-table {
+    min-width: 100% !important;
+    font-size: 10px !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="topbar" id="portalHeader" style="display:none">
+  <div class="topbar-main">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <clipPath id="hupSealClip">
+              <circle cx="150" cy="150" r="144"/>
+            </clipPath>
+            <clipPath id="hupInnerClip">
+              <circle cx="150" cy="150" r="113"/>
+            </clipPath>
+            <path id="hupTopArc" d="M 27,150 A 123,123 0 1,1 273,150"/>
+            <path id="hupBottomArc" d="M 22,155 A 128,128 0 0,0 278,155"/>
+          </defs>
+
+          <!-- Nền tròn trắng ngoài cùng -->
+          <circle cx="150" cy="150" r="144" fill="#ffffff"/>
+
+          <g clip-path="url(#hupSealClip)">
+            <!-- Nền xanh nhạt bên trong -->
+            <circle cx="150" cy="150" r="113" fill="#d4e3f6"/>
+
+            <!-- Khối nền xanh lá dưới đáy (phần bìa sách) -->
+            <path d="M -5,188 Q 75,168 150,200 Q 225,168 305,188 L 305,305 L -5,305 Z" fill="#3b7a22" stroke="#1e2421" stroke-width="3.5"/>
+
+            <!-- Các trang sách mở -->
+            <path d="M 5,183 Q 78,162 150,193 Q 222,162 295,183 L 295,191 Q 222,171 150,202 Q 78,171 5,191 Z" fill="#ffffff" stroke="#1e2421" stroke-width="2.5"/>
+            <path d="M 5,174 Q 78,153 150,185 Q 222,153 295,174 L 295,183 Q 222,162 150,193 Q 78,162 5,183 Z" fill="#ffffff" stroke="#1e2421" stroke-width="2.5"/>
+
+            <!-- Chữ vòng cung dưới màu trắng -->
+            <text fill="#ffffff" font-family="Arial Narrow, Arial, sans-serif" font-weight="bold" font-size="18.2" letter-spacing="0.8">
+              <textPath href="#hupBottomArc" startOffset="50%" text-anchor="middle">HANOI UNIVERSITY OF PHARMACY</textPath>
+            </text>
+
+            <!-- Biểu tượng Chén thuốc & Con rắn -->
+            <g clip-path="url(#hupInnerClip)">
+              <!-- Thân rắn cuộn phía sau chén -->
+              <path d="M 140,94 C 126,64 162,55 157,74 C 155,82 147,82 149,94" fill="none" stroke="#181c1a" stroke-width="9" stroke-linecap="round"/>
+              <!-- Đầu rắn & lưỡi -->
+              <ellipse cx="157" cy="73" rx="6.5" ry="4.5" transform="rotate(20 157 73)" fill="#181c1a"/>
+              <circle cx="159" cy="72" r="1.1" fill="#ffffff"/>
+              <path d="M 163,75 L 168,78 M 166,77 L 168,75" stroke="#181c1a" stroke-width="1.3" stroke-linecap="round"/>
+
+              <!-- Chân đế & Thân ly -->
+              <path d="M 134,187 Q 150,178 166,187 Z" fill="#ffffff" stroke="#181c1a" stroke-width="3.2" stroke-linejoin="round"/>
+              <rect x="146" y="128" width="8" height="55" fill="#ffffff" stroke="#181c1a" stroke-width="3.2"/>
+
+              <!-- Chén thuốc -->
+              <path d="M 109,94 H 191 A 41,35 0 0 1 109,94 Z" fill="#ffffff" stroke="#181c1a" stroke-width="3.5" stroke-linejoin="round"/>
+
+              <!-- Thân rắn quấn quanh trụ ly -->
+              <path d="M 153,129 C 174,132 174,148 153,152" fill="none" stroke="#181c1a" stroke-width="9" stroke-linecap="round"/>
+              <path d="M 147,154 C 133,160 133,172 147,177" fill="none" stroke="#181c1a" stroke-width="7.5" stroke-linecap="round"/>
+            </g>
+
+            <!-- Viền vòng tròn trong -->
+            <circle cx="150" cy="150" r="113" fill="none" stroke="#1e2421" stroke-width="3.5"/>
+
+            <!-- Chữ vòng cung trên màu xanh lá -->
+            <text fill="#287a24" font-family="Arial Narrow, Arial, sans-serif" font-weight="bold" font-size="18.5" letter-spacing="0.9">
+              <textPath href="#hupTopArc" startOffset="50%" text-anchor="middle">TRƯỜNG ĐẠI HỌC DƯỢC HÀ NỘI</textPath>
+            </text>
+          </g>
+
+          <!-- Viền đen ngoài cùng -->
+          <circle cx="150" cy="150" r="144" fill="none" stroke="#1e2421" stroke-width="4.5"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <b>TRƯỜNG ĐẠI HỌC DƯỢC HÀ NỘI</b>
+        <small>CỔNG ĐĂNG KÝ HỌC TÍN CHỈ</small>
+      </div>
+    </div>
+
+    <div class="header-user" id="headerUserBar">
+      <span>Hello, <span id="userEmail">2501726@hup.edu.vn</span>!</span>
+      <a id="signOutBtn">Sign out</a>
+    </div>
+  </div>
+
+  <nav class="nav-pills" id="mainNavBar" aria-label="Điều hướng chính">
+    <a class="nav-pill" data-page="registerView">ĐĂNG KÝ HỌC</a>
+    <a class="nav-pill" data-page="retakeView">Đ.KÝ THI LẠI &amp; THI CẢI THIỆN</a>
+    <a class="nav-pill" data-page="appealView">Đ.KÝ PHÚC KHẢO</a>
+    <a class="nav-pill" data-page="internshipView">Đ.KÝ INTERNSHIP</a>
+    <a class="nav-pill" data-page="thesisView">Đ.KÝ KHÓA LUẬN</a>
+    <div class="nav-dropdown">
+      <button type="button" class="nav-pill active" id="personalMenuBtn">THÔNG TIN CÁ NHÂN <span class="caret">▾</span></button>
+      <div class="dropdown-menu" id="personalDropdown">
+        <a data-nav="secGrades">Bảng điểm cá nhân</a>
+        <a data-nav="secUnlearned">Danh sách học phần chưa học</a>
+        <a id="menuPrint">In bảng điểm cá nhân</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- KHU VỰC NỘI DUNG CHÍNH (ẨN CHO ĐẾN KHI ĐĂNG NHẬP THÀNH CÔNG) -->
+<main id="app" style="display:none">
+  <!-- 1. BẢNG ĐIỂM CÁ NHÂN -->
+  <section id="gradesView" class="portal-section active">
+    <div class="filterbar">
+      <label for="viewSelect">Xem bảng điểm:</label>
+      <select id="viewSelect">
+        <option value="main">Bảng điểm chuyên ngành chính</option>
+        <option value="second">Bảng điểm chuyên ngành 2</option>
+      </select>
+    </div>
+
+    <div class="title" id="secGrades">BẢNG ĐIỂM CÁ NHÂN</div>
+
+    <div class="stats">
+      <div>
+        TBCHT thang điểm 4: <b>3,46</b><br>
+        TBCHT thang điểm 4(Lần 1): <b>3,46</b><br>
+        Số tín chỉ đã tích luỹ: <b>29</b><br>
+        Tổng số tín chỉ đã có điểm: <b>29</b>
+      </div>
+      <div>
+        TBCHT thang điểm 10: <b>8,25</b><br>
+        TBCHT thang điểm 10(Lần 1): <b>8,25</b><br>
+        Số môn thi lại: <b>0</b><br>
+        Số môn chờ điểm: <b>1</b>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="tblMain" class="data-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Kỳ<br>Thứ</th>
+            <th>Ký Hiệu</th>
+            <th>Tên<br>Học<br>Phần</th>
+            <th>Số<br>Tin<br>Chỉ</th>
+            <th>Không<br>Tính<br>TBCMH</th>
+            <th>CĐR</th>
+            <th>LT<br>(%)</th>
+            <th>TH<br>(%)</th>
+            <th>SM<br>(%)</th>
+            <th>CC<br>(%)</th>
+            <th>Điểm<br>Thành<br>Phần</th>
+            <th>Điểm<br>Thi</th>
+            <th>Hoãn<br>thi</th>
+            <th>TBCMH<br>Lần1<br>(TĐ10)</th>
+            <th>TBCMH<br>Max<br>(TĐ10)</th>
+            <th>Điểm<br>Chữ</th>
+            <th>Điểm<br>Số</th>
+            <th>Ghi<br>chú</th>
+          </tr>
+        </thead>
+        <tbody id="tb"></tbody>
+      </table>
+    </div>
+
+    <div class="section-title" id="secUnlearned">DANH SÁCH HỌC PHẦN CHƯA HỌC</div>
+
+    <div class="table-wrap">
+      <table id="tblUnlearned" class="data-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Kỳ Thứ</th>
+            <th>Ký Hiệu</th>
+            <th>Tên Học Phần</th>
+            <th>Số Tin Chỉ</th>
+            <th>Không Tính TBCMH</th>
+            <th>CĐR</th>
+            <th>LT (%)</th>
+            <th>TH (%)</th>
+            <th>SM (%)</th>
+            <th>CC (%)</th>
+          </tr>
+        </thead>
+        <tbody id="tb2"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. ĐĂNG KÝ HỌC -->
+  <section id="registerView" class="portal-section reg-page">
+    <div class="reg-alert">Chưa có thông tin đăng ký, bạn quay lại đăng ký sau !</div>
+    <h1 class="reg-heading green">ĐĂNG KÝ HỌC THƯỜNG</h1>
+    <h2 class="reg-step-title">Bước 1/3: Chọn học phần tín chỉ</h2>
+
+    <div class="reg-action-row">
+      <button type="button" class="btn-step" disabled>Bước tiếp theo</button>
+    </div>
+
+    <div class="reg-meta-row">
+      <span>Số tín chỉ đăng ký tối thiểu</span>
+      <span>Số tín chỉ đăng ký tối đa</span>
+      <span>Số tiền / 1 tín chỉ</span>
+    </div>
+
+    <h2 class="reg-section-title left">DÁCH SÁCH HỌC PHẦN ĐÃ CHỌN</h2>
+
+    <div class="reg-meta-row">
+      <span>Số học phần đã đăng ký: 0</span>
+      <span>Tổng số tín chỉ đã đăng ký: 0</span>
+      <span>Tổng số tiền học phí phải nộp:</span>
+    </div>
+
+    <div class="reg-action-row">
+      <button type="button" class="btn-step" disabled>Bước tiếp theo</button>
+    </div>
+  </section>
+
+  <!-- 3. Đ.KÝ THI LẠI & THI CẢI THIỆN -->
+  <section id="retakeView" class="portal-section reg-page">
+    <h1 class="reg-heading">ĐĂNG KÝ THI LẠI - THI CẢI THIỆN ĐIỂM</h1>
+    <div class="reg-alert">Bạn đã hết thời gian đăng ký!</div>
+
+    <div class="reg-meta-row">
+      <span>Số tín chỉ đăng ký tối thiểu</span>
+      <span>Số tín chỉ đăng ký tối đa</span>
+      <span></span>
+    </div>
+
+    <h2 class="reg-section-title">DÁCH SÁCH HỌC PHẦN ĐÃ CHỌN</h2>
+
+    <div class="reg-meta-row">
+      <span>Số học phần đã đăng ký:</span>
+      <span>Tổng số tín chỉ đã đăng ký</span>
+      <span></span>
+    </div>
+
+    <ul class="fee-notes">
+      <li>Chú ý: đăng ký thi lại Lý thuyết tổng hợp: 500.000đ/sinh viên/lần đăng ký.</li>
+      <li>Đối với lần đầu đăng ký thi của 01 học phần ở kỳ thi phụ:
+        <ul>
+          <li>Thi lại (điểm F): học phần thi bằng tiếng Việt 80.000đ/tín chỉ; học phần thi bằng biếng Anh 120.000đ/tín chỉ.</li>
+          <li>Thi cải thiện (điểm D): học phần thi bằng tiếng Việt 100.000đ/tín chỉ; học phần thi bằng biếng Anh 200.000đ/tín chỉ.</li>
+          <li>Hoãn thi (ghi chú "P") không mất phí</li>
+        </ul>
+      </li>
+      <li>Đối với học phần đăng ký thi lại, thi cải thiện từ lần thứ hai trở đi.</li>
+    </ul>
+
+    <div class="table-wrap">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Ngành học</th>
+            <th>Mức thu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Dược học - hệ đại trà</td><td>460.000đ/tín chỉ</td></tr>
+          <tr><td>2</td><td>Hóa dược</td><td>417.000đ/tín chỉ</td></tr>
+          <tr><td>3</td><td>Hóa học</td><td>290.000đ/tín chỉ</td></tr>
+          <tr><td>4</td><td>Công nghệ sinh học</td><td>290.000đ/tín chỉ</td></tr>
+          <tr><td>5</td><td>Dược học - hệ CLC</td><td>725.000đ/tín chỉ</td></tr>
+          <tr><td>6</td><td>CT Liên kết</td><td>2.528.000đ/tín chỉ</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="fee-notes">
+      <li>SV cần nộp lệ phí đúng hạn quy định &amp; theo dõi thông báo của PĐT về ds đăng ký thành công</li>
+    </ul>
+  </section>
+
+  <!-- 4. Đ.KÝ PHÚC KHẢO -->
+  <section id="appealView" class="portal-section reg-page">
+    <h1 class="reg-heading green">DANH SÁCH HỌC PHẦN ĐƯỢC ĐĂNG KÝ PHÚC KHẢO</h1>
+
+    <div class="appeal-table-wrap">
+      Hiện chưa có học phần trong thời gian đăng ký phúc khảo.
+    </div>
+
+    <div class="appeal-guide">
+      <div class="guide-head">HƯỚNG DẪN THỰC HIỆN PHÚC KHẢO HỌC PHẦN:</div>
+      <div class="guide-step">1. NỘP LỆ PHÍ PHÚC KHẢO:</div>
+      <ul>
+        <li>SV nộp lệ phí phúc khảo theo quy định.</li>
+        <li>Chụp lại màn hình giao dịch thành công làm minh chứng.</li>
+      </ul>
+      <div class="guide-step">2. THỰC HIỆN PHÚC KHẢO:</div>
+      <ul>
+        <li>Tại bảng DANH SÁCH HỌC PHẦN ĐƯỢC ĐĂNG KÝ PHÚC KHẢO, SV chọn học phần cần phúc khảo bằng cách tích vào ô “Đăng ký phúc khảo”.</li>
+        <li>Tại bảng DANH SÁCH HỌC PHẦN ĐÃ ĐĂNG KÝ PHÚC KHẢO, chọn “Upload minh chứng” để điền số điện thoại và upload ảnh nộp lệ phí phúc khảo. Bấm “Gửi đơn phúc khảo” để hoàn thiện việc đăng ký phúc khảo.</li>
+      </ul>
+      <div class="guide-step">3. THEO DÕI ĐƠN PHÚC KHẢO:</div>
+      <ul>
+        <li>SV theo dõi đơn tại ô “Tình trạng đơn phúc khảo” .</li>
+      </ul>
+      <div class="guide-step">4. LƯU Ý:</div>
+      <ul>
+        <li>Các học phần THI TRẮC NGHIỆM, tốt nghiệp lý thuyết tổng hợp; học phần thực tế; học phần nhập môn dược khoa KHÔNG NỘP ĐƠN PHÚC KHẢO ở đây.</li>
+      </ul>
+    </div>
+
+    <h2 class="reg-section-title left">DÁCH SÁCH HỌC PHẦN ĐÃ ĐĂNG KÝ PHÚC KHẢO</h2>
+
+    <div class="appeal-table-wrap">
+      Chưa có học phần nào được chọn phúc khảo.
+    </div>
+
+    <div class="reg-action-row">
+      <button type="button" class="btn-submit-red" id="sendAppealBtn">Gửi đơn phúc khảo</button>
+    </div>
+  </section>
+
+  <!-- 5. Đ.KÝ INTERNSHIP -->
+  <section id="internshipView" class="portal-section reg-page">
+    <h1 class="reg-heading">ĐĂNG KÝ CHƯƠNG TRÌNH THỰC TẾ DÀI HẠN (INTERNSHIP)</h1>
+    <div class="reg-alert italic">Chưa đến thời gian đăng ký</div>
+
+    <div class="table-wrap">
+      <table id="tblInternship" class="data-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên đơn vị</th>
+            <th>Số lượng tiếp nhận</th>
+            <th>Quyền lợi/Trách nhiệm của sinh viên</th>
+            <th>Yêu cầu</th>
+            <th>Hình thức tuyển sinh</th>
+            <th>Thời gian</th>
+            <th>Đăng ký</th>
+          </tr>
+        </thead>
+        <tbody id="tbIntern"></tbody>
+      </table>
+    </div>
+
+    <div class="intern-count">Cơ sở thực tế đã đăng ký: 0</div>
+    <div class="intern-selected-box"></div>
+  </section>
+
+  <!-- 6. Đ.KÝ KHÓA LUẬN -->
+  <section id="thesisView" class="portal-section guide-page">
+    <h1 class="guide-main-title">HƯỚNG DẪN ĐĂNG KÝ TÍN CHỈ</h1>
+    <h2 class="guide-sub-title">(Sinh viên thực hiện theo các bước sau)</h2>
+
+    <div class="guide-step-line">
+      <u>Bước 1:</u> Sinh viên bấm vào nút <span class="red-note">"Đăng ký học"</span> tương ứng với học phần muốn học trong học kỳ.
+    </div>
+
+    <div class="mock-shot">
+      <div class="mock-shot-top">
+        <span class="mock-btn">Bước tiếp theo</span>
+      </div>
+      <div class="mock-bar-dark">
+        <span>Số tín chỉ đăng ký tối thiểu là: 18</span>
+        <span>Số tín chỉ đăng ký tối đa là: 18</span>
+        <span>Số tiền / 1 tín chỉ</span>
+      </div>
+      <div class="table-wrap">
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th>Điểm</th>
+              <th>Học<br>lại</th>
+              <th>Mã học phần</th>
+              <th>Tên học phần</th>
+              <th>Số tín<br>chỉ</th>
+              <th>Hệ số</th>
+              <th>Số tiền học<br>phí</th>
+              <th>Ràng buộc</th>
+              <th>Bắt<br>buộc</th>
+              <th>Tự<br>chọn</th>
+              <th>Còn<br>trống</th>
+              <th>Đăng ký</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td></td><td></td><td style="text-align:center">102290</td><td>Hoá hữu cơ 2 (Hóa hữu cơ 2_K68)</td><td style="text-align:center">2</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">107</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">111390</td><td>Hoá phân tích 1 (Hóa phân tích 1_K68)</td><td style="text-align:center">3</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">107</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">133290</td><td>Ngoại ngữ 3 (Ngoại ngữ 3_K68)</td><td style="text-align:center">2</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">35</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">163194</td><td>Giáo dục thể chất 3 (*) (GDTC 3_K68)</td><td style="text-align:center">1</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">35</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">171390</td><td>Thực vật dược (Thực vật_K68)</td><td style="text-align:center">3</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">107</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">202390</td><td>Vi sinh (Vi sinh_K68)</td><td style="text-align:center">3</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">107</td><td style="text-align:center">Đăng ký học</td></tr>
+            <tr><td></td><td></td><td style="text-align:center">211490</td><td>Giải phẫu sinh lý (GPSL_K68)</td><td style="text-align:center">4</td><td style="text-align:center">1</td><td style="text-align:right">0</td><td></td><td style="text-align:center">X</td><td style="text-align:center"></td><td style="text-align:right">107</td><td style="text-align:center">Đăng ký học</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mock-callout">Bước 1: Chọn Đăng ký học</div>
+      <div class="mock-bar-dark">
+        <span>Số học phần đã đăng ký: 0</span>
+        <span>Tổng số tín chỉ đã đăng ký: 0</span>
+        <span>Tổng số tiền học phí phải nộp</span>
+      </div>
+      <div class="mock-shot-bottom">
+        <span class="mock-btn">In kết quả đăng ký</span>
+        <span class="mock-btn">Bước tiếp theo</span>
+      </div>
+    </div>
+
+    <div class="guide-step-line">
+      <u>Bước 2:</u> Bấm nút <span class="red-note">"Bước tiếp theo"</span> để chuyển đến bước chọn lớp học tín chỉ
+    </div>
+
+    <div class="mock-shot">
+      <div class="mock-shot-top">
+        <span class="mock-btn">Bước tiếp theo</span>
+      </div>
+      <div class="mock-bar-dark">
+        <span>Số tín chỉ đăng ký tối thiểu là: 18</span>
+        <span>Số tín chỉ đăng ký tối đa là: 18</span>
+        <span>Số tiền / 1 tín chỉ</span>
+      </div>
+      <div class="table-wrap">
+        <table class="mock-table">
+          <thead>
+            <tr>
+              <th>Điểm</th>
+              <th>Học<br>lại</th>
+              <th>Mã học phần</th>
+              <th>Tên học phần</th>
+              <th>Số tín<br>chỉ</th>
+              <th>Hệ số</th>
+              <th>Số tiền học<br>phí</th>
+              <th>Ràng buộc</th>
+              <th>Bắt<br>buộc</th>
+              <th>Tự<br>chọn</th>
+              <th>Còn<br>trống</th>
+              <th>Đăng ký</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 - CỔNG THÔNG TIN SINH VIÊN -TRƯỜNG ĐẠI HỌC DƯỢC HÀ NỘI
+  </footer>
+</main>
+
+<!-- MÀN HÌNH ĐĂNG NHẬP MICROSOFT ENTRA ID (HIỂN THỊ ĐẦU TIÊN) -->
+<div id="loginScreen" class="ms-login-screen">
+  <form class="ms-card" id="loginForm" novalidate>
+    <div class="ms-brand">
+      <svg width="21" height="21" viewBox="0 0 21 21" aria-hidden="true">
+        <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
+        <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
+        <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
+        <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
+      </svg>
+      <span>Microsoft</span>
+    </div>
+
+    <!-- Bước nhập tài khoản -->
+    <div id="msStepUser">
+      <h1 class="ms-title">Sign in</h1>
+      <div id="msUserError" class="ms-error" role="alert"></div>
+      <div class="ms-input-wrap">
+        <input type="text" id="loginUser" class="ms-input" placeholder="Email, phone, or Skype" autocomplete="username" autofocus>
+      </div>
+      <div class="ms-links">
+        <a id="cantAccessBtn">Can’t access your account?</a>
+      </div>
+      <div class="ms-actions">
+        <button type="button" id="msNextBtn" class="ms-submit-btn">Next</button>
+      </div>
+    </div>
+
+    <!-- Bước Enter password -->
+    <div id="msStepPass" style="display:none">
+      <div class="ms-identity-row">
+        <button type="button" id="msBackBtn" class="ms-back-btn" title="Back" aria-label="Back">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M13 8H3.5M7.5 4L3.5 8L7.5 12" stroke="#5e5e5e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <span id="msDisplayEmail">2501726@hup.edu.vn</span>
+      </div>
+
+      <h1 class="ms-title">Enter password</h1>
+      <div id="loginError" class="ms-error" role="alert"></div>
+
+      <div class="ms-input-wrap">
+        <input type="password" id="loginPass" class="ms-input" placeholder="Password" autocomplete="current-password">
+      </div>
+
+      <div class="ms-links">
+        <a id="forgotBtn">Forgot my password</a>
+      </div>
+
+      <div class="ms-actions">
+        <button type="submit" id="loginBtn" class="ms-submit-btn">Sign in</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="ms-footer">
+    <a id="msTermsLink">Terms of use</a>
+    <a id="msPrivacyLink">Privacy &amp; cookies</a>
+    <span style="letter-spacing:1.5px;cursor:pointer" title="More options">•••</span>
+  </div>
+</div>
+
+<!-- HỘP THOẠI CHI TIẾT HỌC PHẦN / THÔNG BÁO -->
+<div class="modal-overlay" id="infoModal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span id="modalTitle">Thông tin học phần</span>
+      <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Đóng">&times;</button>
+    </div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// Tài khoản và mật khẩu duy nhất được phép truy cập
+const ALLOWED_USER = "2501726@hup.edu.vn";
+const ALLOWED_PASS = "Phuongvy17th11@";
+
+// Dữ liệu bảng điểm điều chỉnh (GPA = 3,46; 0 môn trượt; 29 tín chỉ tích lũy)
+const rows = [
+  [6, 1, "DHA0816011", "Giáo dục thể chất 1 (*)", 1, 1, 0, 0, 90, 0, 10, "CC:<br>(9);<br>B1:(8)", "8", "8,1", "8,1", "B1", "3,5", ""],
+  [0, 2, "DHA0816021", "Giáo dục thể chất 2 (*)", 1, 1, 0, 0, 90, 0, 10, "CC:<br>(10);<br>B1:(7,5)", "7,5", "7,8", "7,8", "B2", "3", ""],
+  [17, 3, "DHA0816031", "Giáo dục thể chất 3 (*)", 1, 1, 0, 0, 90, 0, 10, "CC:<br>(9);<br>B1:(8)", "8", "8,1", "8,1", "B1", "3,5", ""],
+  [0, 2, "DHA0210013", "Hóa hữu cơ 1", 3, 0, 0, 20, 30, 0, 0, "KT1:<br>(8);<br>KT2:<br>(8,5);<br>B1:(8,2)", "8", "8,1", "8,1", "B1", "3,5", ""],
+  [0, 2, "DHA0417013", "Thực vật", 3, 0, 0, 20, 25, 0, 0, "KT1:<br>(8);<br>KT2:<br>(8,5);<br>C1:(8);<br>C2:(8)", "7,6", "7,9", "7,9", "B2", "3", ""],
+  [0, 2, "DHA0812083", "Triết học Mác-Lênin", 3, 0, 0, 10, 0, 30, 0, "KT1:<br>(9);<br>KT2:<br>(9,5);<br>S1:<br>(8,5);<br>S2:<br>(8,7);<br>S3:(8,7)", "8,4", "8,6", "8,6", "A2", "3,75", ""],
+  [0, 2, "DHA0703262", "Dược xã hội học", 2, 0, 0, 10, 0, 20, 0, "KT1:<br>(8);<br>S1:<br>(8,5)", "7,6", "7,8", "7,8", "B2", "3", ""],
+  [0, 1, "DHA0703282", "Pháp luật đại cương", 2, 0, 0, 10, 0, 40, 0, "KT1:<br>(8,5);<br>S1:(9)", "8,2", "8,5", "8,5", "A2", "3,75", ""],
+  [0, 1, "DHA0819092", "Tin học ứng dụng", 2, 0, 0, 10, 20, 0, 10, "CC:<br>(10);<br>KT1:<br>(8,5);<br>B2:(8,5);<br>B5:(9);<br>B7:(9,5)", "9", "9", "9", "A1", "4", ""],
+  [0, 1, "DHA0819102", "Thống kê Dược", 2, 0, 0, 20, 0, 0, 10, "CC:<br>(9);<br>KT1:<br>(8);<br>KT2:<br>(8)", "7,5", "7,8", "7,8", "B2", "3", ""],
+  [0, 1, "DHA0809063", "Hóa đại cương vô cơ", 3, 0, 0, 10, 20, 0, 0, "KT1:<br>(8);<br>KT2:<br>(9);<br>B1:(8)", "8", "8,2", "8,2", "B1", "3,5", ""],
+  [0, 1, "DHA0320062", "Đại cương sinh học phân tử tế bào", 2, 0, 0, 40, 0, 0, 0, "KT1:<br>(8,4);<br>KT2:<br>(9,2)", "8,2", "8,5", "8,5", "A2", "3,75", ""],
+  [0, 1, "DHA0099072", "Nhập môn Dược khoa", 2, 0, 0, 20, 30, 0, 0, "KT1:<br>(8,5);<br>B6:<br>(9,8);<br>B7:(9);<br>B9:(9)", "9", "9,1", "9,1", "A1", "4", ""],
+  [0, 2, "DHA0824073", "Vật lý ứng dụng", 3, 0, 0, 10, 30, 0, 10, "CC:<br>(10);<br>KT1:<br>(8,5);<br>KT2:<br>(9);<br>B1:(8);<br>B2:(8)", "8", "8,2", "8,2", "B1", "3,5", ""],
+  [0, 2, "DHA0813152", "Tiếng Anh 1", 2, 0, 0, 30, 0, 0, 10, "CC:<br>(9);<br>KT1:<br>(8);<br>KT2:<br>(8)", "7,5", "7,8", "7,8", "B2", "3", ""],
+  [0, 3, "DHA0813143", "Tiếng Anh 2", 3, 0, 0, 30, 0, 0, 10, "CC:<br>(0);<br>KT1:<br>(0);<br>KT2:<br>(0)", "", "", "", "", "", ""]
+];
+
+const rows2 = [
+  [0, 3, "DHA0812062", "Kinh tế chính trị Mác Lênin", 2, 0, 0, 10, 0, 30, 0],
+  [0, 3, "DHA0320042", "Vi sinh - Ký sinh trùng 1", 2, 0, 0, 20, 30, 0, 0],
+  [14, 3, "DHA0611023", "Hóa phân tích 1", 3, 0, 0, 15, 20, 0, 5],
+  [18, 3, "DHA0521034", "Giải phẫu sinh lý", 4, 0, 0, 10, 20, 0, 10],
+  [19, 3, "DHA0210022", "Hóa hữu cơ 2", 2, 0, 0, 20, 20, 0, 10]
+];
+
+// Danh sách 24 cơ sở thực tế dài hạn (Internship)
+const internRows = [
+  [115, "Công ty CP Dược phẩm Thái Minh\n - Đ/c: Số 3, ngõ 2, phố Thọ Tháp, phường Dịch Vọng, Cầu Giấy, Hà Nội", 10, "Được hỗ trợ ăn trưa; Ưu tiên tuyển dụng theo nhu cầu của Công ty / Tự túc phương tiện đi lại; Tuân thủ nội quy, quy định tại công ty", "Sinh viên ĐHCQ năm 4\n; Sinh viện năm 5 lớp M, O, P, Q", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "Tối thiểu 3 buổi/tuần x 4 -5 tháng"],
+  [116, "Công ty Cổ phần CPC1 Hà Nội\n - Đ/c: Cụm CN Hà Bình Phương, Thường Tín, Hà Nội", 40, "* Quyền lợi: Được đào tạo và thực hành các công tác chuyên môn của các chuyên ngành của công ty (theo phụ lục đính kèm) Phát triển các kỹ năng mềm trong giao tiếp, xử lý tình huống,... Được hưởng các chế độ của TTS theo quy định của công ty Được xác nhận quá trình tham gia thực tập tại Công ty Cổ phần dược phẩm СPC1 Hà Nội khi tham gia đủ thời lượng thực tập.\n* Trách nhiệm: Tuân thủ quy định làm việc của công ty. Trung thực, có trách nhiệm với các hoạt động được phân công và thực hiện nghiêm túc thời gian đăng ký thực tập. Yêu cầu trong vòng 1 tuần đầu tiên kể từ khi có kết quả trúng tuyển tại CPC1 Hà Nội, sinh viên tập trung đầy đủ tại chi nhánh Hà Nội để tham gia đào tạo về nội quy, quy định chung của công ty và thăm quan nhà máy.", "Sinh viên ĐHCQ năm 4\n; Sinh viện năm 5 lớp M, O, Q", "Sinh viên đăng ký - Phỏng vấn", "Theo quy định tại từng Bộ phận tại Công ty"],
+  [117, "Trung tâm DI&ADR Quốc gia\n - Đ/c: 13-15 Lê Thánh Tông, Cửa Nam, Hà Nội", 15, "Được thực hành một số công tác chuyên môn về Thông tin thuốc và Cảnh giác Dược và được xác nhận quá trình thực tập / Tuân thủ nội quy, quy định ; Trung thực, có trách nhiệm với hoạt động được phân công; Ứng xử văn hóa tại nơi làm việc", "Sinh viên ĐHCQ ngành Dược năm 4 & 5; Điểm GPA > 2,8", "Sinh viên đăng ký - Phỏng vấn (Yêu cầu CV)", "Tối thiểu 3 buổi/tuần x 4 - 5 tháng"],
+  [118, "Bệnh viện Hữu Nghị - Việt Xô\n - Đ/c: Số 1 Trần Khánh Dư, Hai Bà Trưng, Hà Nội", 6, "Được đào tạo các hoạt động của Khoa Dược / Đi đủ buổi theo thời lượng thống nhất đầu buổi chương trình, đúng giờ theo quy định bệnh viện; Thực hành các hoạt động nghề nghiệp dưới sự giám sát của Dược sĩ Khoa Dược; Tuân thủ các quy định chung của bệnh viện.", "Sinh viên ĐHCQ năm 5 - Chuyên ngành Dược lâm sàng; Điểm GPA > 3,0", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 - 5 tháng"],
+  [119, "Bệnh viện Hữu Nghị - Việt Nam Cu Ba\n - Đ/c: Số 37 Hai Bà Trưng, Hoàn Kiếm, , Hà Nội", 7, "Được đào tạo và thực hành một số công tác chuyên môn của khoa Dược tại bệnh viện / Về ý thức tổ chức, kỷ luật: Sinh viên khi đi thực tế phải tham gia đầy đủ, đúng giờ các buổi thực tế đã đăng ký. Nếu nghỉ phải có lý do chính đáng và báo trước tối thiểu 01 ngày cho cán bộ hướng dẫn.", "Sinh viên ĐHCQ năm 4; Sinh viện năm 5 lớp N, O", "Sinh viên đăng ký - Phỏng vấn (Yêu cầu CV)", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [120, "Bệnh viện Nhi Trung ương -\nĐ/c: 18/879 La Thành, phường Láng Thượng, quận Đống Đa, Hà Nội", 8, "Được tham gia trải nghiệm làm việc tại một bệnh viên chuyên khoa Nhi tuyến cuối. Trách nhiệm đi đủ thời lượng, đúng giờ, thực hành dưới sự giám sát của Dược sỹ. (SV phải ĐÓNG KINH PHÍ đào tạo: 300.000đ/Khoá)", "Sinh viên ĐHCQ năm 4 & 5; điểm GPA từ 3.2, tiếng Anh đáp ứng yêu cầu công việc", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [121, "Bệnh viện Ung Bướu Hà Nội\n - Đ/c: Số 42A Thanh Nhàn, Hai Bà Trưng, Hà Nội", 5, "Được đào tạo và thực hành một số công tác chuyên môn của khoa Dược tại bệnh viện / Tuân thủ quy định làm việc của khoa Dược và bệnh viện; Trung thực, có trách nhiệm với hoạt động được phân công, thực hiện nghiêm túc thời gian đăng ký thực tập; Ứng xử văn hóa tại nơi thực tập; Hoàn thành theo đúng thời gian cam kết", "Sinh viên ĐHCQ năm 4; Sinh viện năm 5 lớp N", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [122, "Bệnh viện Thanh Nhàn\n - Đ/c: Số 42 Thanh Nhàn - Hai Bà Trưng - Hà Nội", 5, "Được đào tạo các hoạt động của khoa dược Bệnh viện hạng I.\n- Trách nhiệm sinh viên:\n+ Đi đủ số buổi theo thời lượng đã thống nhất từ đầu chương trình, đúng giờ theo quy định của Bệnh viện.\n+ Thực hành các hoạt động nghề nghiệp dưới sự giám sát của Dược sĩ tại khoa Dược và tuân thủ các quy định chung của bệnh viện\n+ Hoàn thành các bài tập theo yêu cầu của Cán bộ hướng dẫn tại Khoa Dược", "Sinh viên ĐHCQ năm 4; Sinh viện năm 5 lớp N, O", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [123, "Bệnh viện Bạch Mai\n - Đ/c: Số 78 Đường Giải Phóng, Phương Mai, Đống Đa, Hà Nội", 10, "Được đào tạo và thực hành các công tác chuyên môn của khoa Dược bệnh viện; Được trải nghiệm môi trường công tác tại khoa Dược thuộc Bệnh viện tuyến Trung ương hàng đầu Quốc Gia; Được xác nhận quá trình thực tập / Tuân thủ quy định làm việc của khoa Dược và bệnh viện; Trung thực, có trách nhiệm với hoạt động được phân công, thực hiện nghiêm túc thời gian đăng ký thực tập; Ứng xử văn hóa tại nơi thực tập; (SV PHẢI.ĐÓNG KINH PHÍ tham gia là 30.000đ/buổi)", "Sinh viên Dược năm 4; Sinh viện Dược năm 5 lớp N, O.\nƯu tiên điểm GPA từ 2,8 trở lên", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "1 buổi/ngày x 5 ngày/tuần x 4-5 tháng"],
+  [124, "Bệnh viện Đa khoa Đức Giang -\nĐ/c: Số 54 Trường Lâm, Phường Đức Giang ,Long Biên, Hà Nội", 6, "Học tập và tham gia các hoạt động của khoa Dược, được cấp Giấy chứng nhận tham gia chương trình Internship.", "Sinh viên Dược năm 4; Sinh viện Dược năm 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [125, "Bệnh viện Đại học Y Hà Nội\n - Đ/c: Số 1 Tôn Thất Tùng, Đống Đa, Hà Nội", 55, "Được tiếp cận sớm hơn với môi trường, công việc của dược sĩ tại bệnh viện, qua đó có cái nhìn thực tế và giúp các em định hướng được nghề nghiệp sau khi ra trường/ Tham gia đầy đủ, đúng giờ các buổi thực tế đã đăng ký, nếu nghỉ phải có lý do chính đáng và báo trước cho cán bộ hướng dẫn", "Sinh viên Dược năm 4; Sinh viện Dược năm 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [126, "Bệnh viện Đa khoa Hà Đông -\nĐ/c: Số 2 Bế Văn Đàn, Quang Trung, Hà Đông, Hà Nội", 10, "Quyền lợi của sinh viên: Được đào tạo các hoạt động chuyên môn của khoa Dược bệnh viện;\n- Trách nhiệm của sinh viên:\n+ Đi đủ số buổi theo thời lượng đã thống nhất từ đầu chương trình, đúng giờ theo quy định của bệnh viện;\n+ Tuân thủ các quy định chung của bệnh viện cũng như quy định của khoa Dược;\n+ Thực hành các công việc dưới sự hướng dẫn của các dược sĩ khoa Dược", "Sinh viên Dược học năm 5 lớp N", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [127, "Bệnh viện Tim Hà Nội\n - Đ/c: 92 Trần Hưng Đạo, Hoàn Kiếm, Hà Nội", 6, "Được đào tạo và thực hành công tác chuyên môn tại khoa Dược; Phát triển các kỹ năng mềm; / Tuân thủ quy định của khoa Dược và bệnh viện; Trung thực, có trách nhiệm với công việc được phân công, thực hiện nghiêm túc thời gian thực tập; Ứng xử văn hóa tại nơi làm việc", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [129, "Bệnh Viện Bỏng Quốc Gia - Lê Hữu Trác\n - Đ/c: 263 Đ. Phùng Hưng, Hà Đông, Hà Nội", 5, "Được tiếp cận sớm hơn với môi trường, công việc của dược sĩ tại bệnh viện, qua đó có cái nhìn thực tế và giúp các em định hướng được nghề nghiệp sau khi ra trường/ Tham gia đầy đủ, đúng giờ các buổi thực tế đã đăng ký, nếu nghỉ phải có lý do chính đáng và báo trước cho cán bộ hướng dẫn. Sinh viên tự túc đóng kinh phí 8.000đ/ngày", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [130, "Bệnh viện Tai Mũi Họng TW\n - Đ/c: Số 78 Đường Giải Phóng, Phương Mai, Đống Đa, Hà Nội", 7, "Được đào tạo và thực hành công tác chuyên môn tại khoa Dược; Phát triển các kỹ năng mềm; Được xác nhận quá trình thực tập / Tuân thủ quy định của khoa Dược và bệnh viện; Trung thực, có trách nhiệm với công việc được phân công, thực hiện nghiêm túc thời gian thực tập; Ứng xử văn hóa tại nơi làm việc", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [131, "Bệnh Viện ĐKQT Vinmec Times City -\nĐ/c: 458 Minh Khai, Vĩnh Tuy, Hà Nội", 20, "Sinh viên có cơ hội kiến tập, tăng cường trải nghiệm và từ đó có định hướng nghề nghiệp rõ ràng trước khi tốt nghiệp.\nSinh viên được tham gia kiến tập tại khoa Dược, quan sát các dược sỹ thực hiện quy trình thực hành chuẩn về kho, nhà thuốc, pha chế và dược lâm sàng.\nSinh viên được tham gia thực hành một số công việc tại khoa Dược dưới sự hướng dẫn và kiểm soát của dược sỹ có chuyên môn.\nSinh viên cần thể hiện tinh thần trách nhiệm với công việc được giao, tuân thủ nội quy và các quy định về bảo mật thông tin tại bệnh viện.\nLưu ý: Sinh viên cần chuẩn bị Sơ yếu lí lịch, Giấy khám sức khoẻ, Căn cước công dân có công chứng", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường (Sinh viên chuẩn bị sẵn Sơ yếu lí lịch có đóng dấu của Địa phương hoặc Nhà trường)", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [132, "Công ty SunPharma (chuỗi Nhà thuốc Phương Chính+ Kho GDP)", 5, "1. Quyền lợi:\nĐược hướng dẫn chuyên môn, được thực hành trong phạm vi cho phép, được hỗ trợ 3 triệu đồng/1 sinh viên khi hoàn thành đợt thực tập\n2. Trách nhiệm:\n- Tuân thủ nội quy, thời gian làm việc\n- Bảo mật thông tin khách hàng\n- Chủ động học hỏi, hoàn thành nhiệm vụ", "Sinh viên Dược học năm 5 lớp O; Yêu cầu sinh viên trung thực, chịu khó, ham học hỏi, lễ phép, lịch sự", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4-5 tháng"],
+  [133, "Bệnh viện Đa khoa Xanh Pôn\n - Đ/c: 12 Chu Văn An, Ba Đình, Hà Nội", 20, "Trách nhiệm: sinh viên đi thực tế đủ số buổi trong đợt thực tế, hoàn thành các công việc được giao;\nQuyền lợi: sinh viên được đào tạo về kiến thức, kỹ năng để tham gia các hoạt động chuyên môn tại khoa Dược bệnh viện. Sinh viên cũng sẽ nhận được xác nhận của bệnh viện đã tham gia chương trình thực tế dài hạn (Internship) tại đơn vị.", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Phỏng vấn (Sinh viên chuẩn bị trước CV online)", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [134, "Bệnh viện TWQĐ 108\n - Đ/c: Số 1A Trần Hưng Đạo, Hai Bà Trưng", 20, "Được đào tạo và thực hành công tác chuyên môn tại khoa Dược / Tuân thủ quy định của khoa Dược và bệnh viện; Trung thực, có trách nhiệm với công việc được phân công, thực hiện nghiêm túc thời gian thực tập; Ứng xử văn hóa tại nơi làm việc. Sinh viên tự túc đóng kinh phí 10.000đ/buổi", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [135, "Công ty Vinpharco -\nĐ/c: 789, Đường Đình Ấm, P.Vĩnh Phúc, T.Phú Thọ, Việt Nam", 6, "Được hỗ trợ ăn trưa; Hỗ trợ đưa đón theo chiều Hà Nội - Vĩnh Phúc", "Sinh viên Dược học năm 5 lớp M, Q", "Sinh viên đăng ký - Phỏng vấn", "5 ngày/tuần x 3-4 tuần x 4 tháng"],
+  [136, "Bệnh viện Nhi Hà Nội -\nĐ/c: Phố Nguyễn Trác, Yên Nghĩa, Hà Đông, Hà Nội", 8, "Sinh viên được hướng dẫn, trực tiếp tham gia các hoạt động chuyên môn tại khoa Dược bệnh viện / Sinh viên đi thực tế đủ số buổi trong đợt thực tế,Tuân thủ quy định của khoa Dược và bệnh viện; Thực hành các hoạt động nghề nghiệp dưới sự phân công của Khoa Dược", "Sinh viên Dược học năm 4 & 5 lớp N", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [137, "Bệnh viện Bưu Điện\n - Đ/c: Số 1, Phố Yên Bái 2, Hai Bà Trưng, Hà Nội", 5, "Sinh viên được hướng dẫn, trực tiếp tham gia các hoạt động chuyên môn tại khoa Dược bệnh viện / Sinh viên đi thực tế đủ số buổi trong đợt thực tế,Tuân thủ quy định của khoa Dược và bệnh viện; Thực hành các hoạt động nghề nghiệp dưới sự phân công của Khoa Dược", "Sinh viên Dược học năm 4 & 5 lớp N, O", "Sinh viên đăng ký - Theo sự phân công của nhà trrường", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [138, "Viện Dược liệu", 20, "1. Quyền lợi\n- Tiếp cận môi trường nghiên cứu khoa học chuyên sâu; Được hướng dẫn chuyên môn bởi các chuyên gia đầu ngành trong lĩnh vực dược liệu, kiểm nghiệm, phân tích,…; Tham gia các hoạt động phòng thí nghiệm và sản xuất; Nâng cao kỹ năng nghiên cứu và kỹ năng nghề nghiệp như thiết kế thí nghiệm, xử lý số liệu, viết báo cáo khoa học,…; Được cấp giấy xác nhận thực tập; có cơ hội được xem xét tuyển dụng hoặc tiếp tục tham gia các đề tài nghiên cứu nếu có năng lực tốt.\n2. Trách nhiệm\n- Tuân thủ nội quy, quy chế của Viện; Thực hiện nhiệm vụ chuyên môn được phân công; Chủ động học tập, nâng cao kiến thức; Báo cáo tiến độ và kết quả thực tập.", "Sinh viên Dược học năm 4 các lớp P,Q,M,N\n; Sinh viên Dược học năm 5 lớp P;\n Điểm GPA > 2,8", "Sinh viên đăng ký - Phỏng vấn", "3 buổi/tuần x 4 tháng\n(từ tháng 8/2026 - tháng 12/2026)"],
+  [139, "Viện Kiểm nghiệm an toàn vệ sinh thực phẩm quốc gia", 50, "", "Trung thực, cầu thị.\n- Sinh viên ngành: Dược học, Hóa dược\n, GPA ≥ 2.5", "Theo quy định nhà trường", "Từ tháng 8 đến tháng 12 /2026"]
+];
+
+function renderMainRows(mode = "main") {
+  const tb = document.getElementById("tb");
+  tb.innerHTML = "";
+  if (mode === "second") {
+    tb.innerHTML = `<tr><td colspan="19" style="text-align:center;padding:16px;color:#666;">Sinh viên chưa đăng ký học phần chuyên ngành 2.</td></tr>`;
+    return;
+  }
+
+  rows.forEach((r, idx) => {
+    const [stt, ky, code, name, tc, notinh, cdr, lt, th, sm, cc, diemTP, diemThi, tbcLan1, tbcMax, diemChu, diemSo, ghiChu] = r;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      `<td class="col-stt">${stt}</td>` +
+      `<td class="col-ky">${ky}</td>` +
+      `<td class="code"><a data-type="main" data-idx="${idx}">${code}</a></td>` +
+      `<td class="name"><a data-type="main" data-idx="${idx}">${name}</a></td>` +
+      `<td class="col-center">${tc}</td>` +
+      `<td class="col-center"><span class="chk ${notinh ? "on" : ""}" role="checkbox" aria-checked="${!!notinh}"></span></td>` +
+      `<td class="col-center"><span class="chk ${cdr ? "on" : ""}" role="checkbox" aria-checked="${!!cdr}"></span></td>` +
+      `<td class="col-center">${lt}</td>` +
+      `<td class="col-center">${th}</td>` +
+      `<td class="col-center">${sm}</td>` +
+      `<td class="col-center">${cc}</td>` +
+      `<td class="col-tp">${diemTP}</td>` +
+      `<td class="col-center">${diemThi}</td>` +
+      `<td class="col-center"><span class="chk" role="checkbox" aria-checked="false"></span></td>` +
+      `<td class="col-center">${tbcLan1}</td>` +
+      `<td class="col-center">${tbcMax}</td>` +
+      `<td class="col-center">${diemChu}</td>` +
+      `<td class="col-center">${diemSo}</td>` +
+      `<td class="col-note">${ghiChu}</td>`;
+    tb.appendChild(tr);
+  });
+}
+
+function renderUnlearnedRows() {
+  const tb2 = document.getElementById("tb2");
+  tb2.innerHTML = "";
+  rows2.forEach((r, idx) => {
+    const [stt, ky, code, name, tc, notinh, cdr, lt, th, sm, cc] = r;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      `<td class="col-stt">${stt}</td>` +
+      `<td class="col-ky">${ky}</td>` +
+      `<td class="code"><a data-type="unlearned" data-idx="${idx}">${code}</a></td>` +
+      `<td class="name"><a data-type="unlearned" data-idx="${idx}">${name}</a></td>` +
+      `<td class="col-center">${tc}</td>` +
+      `<td class="col-center"><span class="chk ${notinh ? "on" : ""}" role="checkbox" aria-checked="${!!notinh}"></span></td>` +
+      `<td class="col-center"><span class="chk ${cdr ? "on" : ""}" role="checkbox" aria-checked="${!!cdr}"></span></td>` +
+      `<td class="col-center">${lt}</td>` +
+      `<td class="col-center">${th}</td>` +
+      `<td class="col-center">${sm}</td>` +
+      `<td class="col-center">${cc}</td>`;
+    tb2.appendChild(tr);
+  });
+}
+
+function renderInternRows() {
+  const tbIntern = document.getElementById("tbIntern");
+  tbIntern.innerHTML = "";
+  internRows.forEach(r => {
+    const [stt, unit, qty, benefit, req, method, time] = r;
+    const tr = document.createElement("tr");
+    tr.innerHTML =
+      `<td class="col-stt">${stt}</td>` +
+      `<td style="min-width:150px">${unit}</td>` +
+      `<td class="col-center">${qty}</td>` +
+      `<td style="min-width:210px">${benefit}</td>` +
+      `<td style="min-width:130px">${req}</td>` +
+      `<td style="min-width:120px">${method}</td>` +
+      `<td style="min-width:110px">${time}</td>` +
+      `<td class="col-center"></td>`;
+    tbIntern.appendChild(tr);
+  });
+}
+
+renderMainRows("main");
+renderUnlearnedRows();
+renderInternRows();
+
+document.getElementById("viewSelect").addEventListener("change", e => {
+  renderMainRows(e.target.value);
+});
+
+// ================= CHUYỂN ĐỔI CÁC TRANG TRÊN NAVBAR =================
+const sections = document.querySelectorAll(".portal-section");
+const navPageBtns = document.querySelectorAll(".nav-pill[data-page]");
+const personalMenuBtn = document.getElementById("personalMenuBtn");
+const personalDropdown = document.getElementById("personalDropdown");
+
+function showPortalPage(pageId, scrollTargetId = null) {
+  sections.forEach(sec => sec.classList.remove("active"));
+  const targetSec = document.getElementById(pageId);
+  if (targetSec) targetSec.classList.add("active");
+
+  navPageBtns.forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.page === pageId);
+  });
+  personalMenuBtn.classList.toggle("active", pageId === "gradesView");
+  personalDropdown.classList.remove("open");
+
+  if (scrollTargetId) {
+    const el = document.getElementById(scrollTargetId);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  } else {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+}
+
+navPageBtns.forEach(btn => {
+  btn.addEventListener("click", () => showPortalPage(btn.dataset.page));
+});
+
+personalMenuBtn.addEventListener("click", e => {
+  e.stopPropagation();
+  personalDropdown.classList.toggle("open");
+});
+
+document.addEventListener("click", () => personalDropdown.classList.remove("open"));
+
+personalDropdown.querySelectorAll("a[data-nav]").forEach(link => {
+  link.addEventListener("click", () => showPortalPage("gradesView", link.dataset.nav));
+});
+
+document.getElementById("menuPrint").addEventListener("click", () => {
+  showPortalPage("gradesView");
+  setTimeout(() => window.print(), 100);
+});
+
+// ================= CHI TIẾT HỌC PHẦN & TƯƠNG TÁC =================
+const modal = document.getElementById("infoModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalContent = document.getElementById("modalContent");
+
+function showModal(title, html) {
+  modalTitle.textContent = title;
+  modalContent.innerHTML = html;
+  modal.classList.add("open");
+}
+
+document.getElementById("modalCloseBtn").addEventListener("click", () => modal.classList.remove("open"));
+modal.addEventListener("click", e => {
+  if (e.target === modal) modal.classList.remove("open");
+});
+
+document.getElementById("sendAppealBtn").addEventListener("click", () => {
+  showModal("Thông báo phúc khảo", "Bạn chưa chọn học phần nào để gửi đơn phúc khảo.");
+});
+
+document.body.addEventListener("click", e => {
+  const courseLink = e.target.closest("a[data-idx]");
+  if (courseLink) {
+    const src = courseLink.dataset.type === "main" ? rows : rows2;
+    const item = src[Number(courseLink.dataset.idx)];
+    const [, ky, code, name, tc, notinh, , lt, th, sm, cc, diemTP, diemThi, tbcLan1, , diemChu, diemSo] = item;
+    const thi = Math.max(0, 100 - (lt + th + sm + cc));
+    const gradeInfo = diemTP
+      ? `<div style="margin-top:6px"><b>Điểm thi:</b> ${diemThi || "Chờ điểm"} &nbsp;|&nbsp; <b>TBCMH:</b> ${tbcLan1 || "—"} ${diemChu ? `(${diemChu} - ${diemSo})` : ""}</div>
+         <div style="margin-top:4px"><b>Điểm thành phần:</b> ${diemTP.replace(/<br>/g, " ")}</div>`
+      : "";
+    showModal(
+      `${code} - ${name}`,
+      `<div><b>Kỳ học:</b> Kỳ thứ ${ky} &nbsp;|&nbsp; <b>Số tín chỉ:</b> ${tc}</div>
+       <div style="margin-top:4px"><b>Tính TBCMH:</b> ${notinh ? "Không tính (Học phần điều kiện *)" : "Có tính vào TBCMH"}</div>
+       ${gradeInfo}
+       <table class="modal-table">
+         <thead><tr><th>LT (%)</th><th>TH (%)</th><th>SM (%)</th><th>CC (%)</th><th>Thi (%)</th></tr></thead>
+         <tbody><tr><td>${lt}</td><td>${th}</td><td>${sm}</td><td>${cc}</td><td>${thi}</td></tr></tbody>
+       </table>`
+    );
+    return;
+  }
+
+  const toggleEl = e.target.closest(".chk");
+  if (toggleEl) {
+    const isOn = toggleEl.classList.toggle("on");
+    toggleEl.setAttribute("aria-checked", String(isOn));
+  }
+});
+
+// ================= ĐĂNG NHẬP / ĐĂNG XUẤT BẮT BUỘC =================
+function setLoggedIn(email) {
+  document.getElementById("userEmail").textContent = email;
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById("portalHeader").style.display = "block";
+  document.getElementById("app").style.display = "block";
+  showPortalPage("gradesView");
+}
+
+function signOut() {
+  document.getElementById("app").style.display = "none";
+  document.getElementById("portalHeader").style.display = "none";
+  document.getElementById("loginScreen").style.display = "flex";
+  document.getElementById("msStepPass").style.display = "none";
+  document.getElementById("msStepUser").style.display = "block";
+  document.getElementById("loginUser").value = "";
+  document.getElementById("loginPass").value = "";
+  document.getElementById("loginError").textContent = "";
+  document.getElementById("msUserError").textContent = "";
+  setTimeout(() => document.getElementById("loginUser").focus(), 50);
+}
+
+document.getElementById("msBackBtn").addEventListener("click", () => {
+  document.getElementById("msStepPass").style.display = "none";
+  document.getElementById("msStepUser").style.display = "block";
+  document.getElementById("loginError").textContent = "";
+  document.getElementById("loginPass").value = "";
+  document.getElementById("loginUser").focus();
+});
+
+document.getElementById("msNextBtn").addEventListener("click", () => {
+  const u = document.getElementById("loginUser").value.trim().toLowerCase();
+  const userErr = document.getElementById("msUserError");
+  if (!u) {
+    userErr.textContent = "Enter a valid email address, phone number, or Skype name.";
+    return;
+  }
+  if (u !== ALLOWED_USER) {
+    userErr.textContent = "We couldn't find an account with that username. Try another, or get a new Microsoft account.";
+    return;
+  }
+  userErr.textContent = "";
+  document.getElementById("msDisplayEmail").textContent = ALLOWED_USER;
+  document.getElementById("msStepUser").style.display = "none";
+  document.getElementById("msStepPass").style.display = "block";
+  document.getElementById("loginPass").focus();
+});
+
+document.getElementById("loginForm").addEventListener("submit", e => {
+  e.preventDefault();
+  if (document.getElementById("msStepUser").style.display !== "none") {
+    document.getElementById("msNextBtn").click();
+    return;
+  }
+  const u = document.getElementById("msDisplayEmail").textContent.trim().toLowerCase();
+  const p = document.getElementById("loginPass").value;
+  const err = document.getElementById("loginError");
+  if (!p) {
+    err.textContent = "Please enter the password for your Microsoft account.";
+    return;
+  }
+  if (u !== ALLOWED_USER || p !== ALLOWED_PASS) {
+    err.textContent = "Your account or password is incorrect. If you don't remember your password, reset it now.";
+    return;
+  }
+  err.textContent = "";
+  setLoggedIn(ALLOWED_USER);
+});
+
+document.getElementById("forgotBtn").addEventListener("click", () => {
+  showModal(
+    "Recover your account",
+    "Sinh viên vui lòng liên hệ Phòng Quản lý Đào tạo (Trường Đại học Dược Hà Nội) hoặc email <b>daotao@hup.edu.vn</b> để được hỗ trợ đặt lại mật khẩu tài khoản Microsoft 365."
+  );
+});
+
+document.getElementById("cantAccessBtn").addEventListener("click", () => {
+  showModal(
+    "Can’t access your account?",
+    "Vui lòng sử dụng tài khoản email sinh viên dạng <b>[Mã sinh viên]@hup.edu.vn</b> do Trường Đại học Dược Hà Nội cấp."
+  );
+});
+
+document.getElementById("signOutBtn").addEventListener("click", signOut);
+</script>
+</body>
+</html>
